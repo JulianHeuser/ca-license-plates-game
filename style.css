@@ -9,13 +9,18 @@ button{
     border-width: 2px;
     border-style: solid;
     
-    padding: 5vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+
     margin: 5px;
     border-color: grey;
 }
 
 #score{
-    position: absolute;
+    position: fixed;
     padding: 10px;
     font-size: 20px;
     text-align: left;
@@ -34,11 +39,10 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100%;
 }
 
 #content{
-    width: 50%;
-
     text-align: center;
+    margin-left: 10vw;
+    margin-right: 10vw;
 }
