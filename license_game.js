@@ -122,4 +122,15 @@ function UpdateScores() {
     }
 }
 
+function ToggleAbout(){
+    let content = document.getElementById("aboutContent");
+
+    if (content.className == "hiddenAbout"){
+        content.className = "";
+    }
+    else{
+        content.className = "hiddenAbout";
+    }
+}
+
 Init();

@@ -25,8 +25,42 @@ button{
     font-size: 20px;
     text-align: left;
     top: 0;
-    bottom: 0;
 } 
+
+#about{
+    position: fixed;
+    padding: 10px;
+    font-size: 20px;
+    top: 0;
+    right: 0;
+    left: auto;
+    z-index: 20;
+}
+
+#aboutContent{
+    position: fixed;
+
+
+    left: 10vw;
+    right: 10vw;
+    border-radius: 5px;
+    padding: 5px;
+
+    background-color: white;
+    border-width: 2px;
+    border-style: solid;
+    border-color: grey;
+
+    opacity: 1;
+    transform: translate(0, 0);
+
+    transition: transform .2s, all .2s;
+}
+#aboutContent.hiddenAbout{
+    opacity: 0;
+    transform: translate(0, -50px);
+    visibility: hidden;
+}
 
 body{
     margin: 0;
@@ -42,6 +76,7 @@ body{
 }
 
 #content{
+    position: relative;
     text-align: center;
     margin-left: 10vw;
     margin-right: 10vw;
