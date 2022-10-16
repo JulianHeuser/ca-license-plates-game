@@ -23,13 +23,19 @@
 
                 <p><a href = "https://github.com/JulianHeuser/ca-license-plates-game"> You can view the source code here.</a> Feel free to make an issue or PR if anything goes wrong or if you have a suggestion. I'm open to ideas!
 
+                <p>Also check out the <a href = "https://github.com/rjindael/ca-dmv">Twitter bot</a> that provided the inspiration and some assets for this project.
+                
             </div>
         </div>
 
         <div id = outer>
             <div id = "content">
 
-                <div id = "plate"></div>
+                <div id = "plate_container">
+                    <img id = "plateImg" src = "plate_bg.png">
+                    <div id = "plate"></div>
+                </div>
+
                 <div id = "customerMeaning"></div>
 
                 <button class = "mainButton" onclick = "UserGuess(true)">Approved</button>

@@ -1,5 +1,27 @@
-#plate{
-    font-size: 36px;
+@font-face {
+    font-family: plateFont;
+    src: url(plateFont.ttf);
+}
+
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#outer{
+    position: relative;
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#content{
+    position: relative;
+    text-align: center;
+    margin-left: 10vw;
+    margin-right: 10vw;
 }
 
 button{
@@ -19,18 +41,54 @@ button{
     border-color: grey;
 }
 
+#plate_container{
+    position: relative;
+    min-width: 50vw;
+    max-width: 100vh;
+    height: auto;
+    display: block;
+    margin: auto
+}
+
+#plate{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+
+    font-size: 15vw;
+
+    font-family: "plateFont";
+    z-index: 2;
+}
+@media screen and (min-aspect-ratio: 1/1) {
+    #plate {
+        font-size: 15vh;
+    }
+}
+
+#plateImg{
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    z-index: -1;
+}
+
 #score{
     position: fixed;
     padding: 10px;
     font-size: 20px;
     text-align: left;
     top: 0;
+    z-index: 10;
 } 
 
 #about{
     position: fixed;
     padding: 10px;
-    font-size: 20px;
+    font-size: 15px;
     top: 0;
     right: 0;
     left: auto;
@@ -60,24 +118,4 @@ button{
     opacity: 0;
     transform: translate(0, -50px);
     visibility: hidden;
-}
-
-body{
-    margin: 0;
-}
-
-#outer{
-    position: relative;
-    display: block;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-#content{
-    position: relative;
-    text-align: center;
-    margin-left: 10vw;
-    margin-right: 10vw;
 }

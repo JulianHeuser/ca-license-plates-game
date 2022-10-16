@@ -57,7 +57,6 @@ function Init() {
     for(let cookie of cookies){
         cookie = cookie.split("=");
         cookie[0] = cookie[0].trim();
-        console.log(cookie)
 
         switch(cookie[0]){
             case "attempts":
@@ -147,10 +146,10 @@ function UpdateScores() {
         scoreHtml.innerText = "Score: rejected (gang number)";
     }
 
-    document.cookie = `attempts=${attempts}; SameSite=Strict`;
-    document.cookie = `score=${score}; SameSite=Strict`;
-    document.cookie = `streak=${streak}; SameSite=Strict`;
-    document.cookie = `bestStreak=${bestStreak}; SameSite=Strict`;
+    document.cookie = `attempts=${attempts}; SameSite=Lax`;
+    document.cookie = `score=${score}; SameSite=Lax`;
+    document.cookie = `streak=${streak}; SameSite=Lax`;
+    document.cookie = `bestStreak=${bestStreak}; SameSite=Lax`;
 }
 
 function ToggleAbout(){
