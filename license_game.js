@@ -46,12 +46,38 @@ async function GetFile(filepath) {
 
 
 function Init() {
+    // Read csv
     file = GetFile("applications.csv").then((data) => {
         fileData = data.split('\n');
         StartGame();
     });
 
+    // Set scores from cookies
+    let cookies = document.cookie.split(";");
+    for(let cookie of cookies){
+        cookie = cookie.split("=");
+        cookie[0] = cookie[0].trim();
+        console.log(cookie)
+
+        switch(cookie[0]){
+            case "attempts":
+                attempts = cookie[1];
+                break;
+            case "score":
+                score = cookie[1];
+                break;
+            case "streak":
+                streak = cookie[1];
+                break;
+            case "bestStreak":
+                bestStreak = cookie[1];
+                break;
+        }
+    }
+
+    // init scores
     UpdateScores();
+
 }
 
 
@@ -120,6 +146,11 @@ function UpdateScores() {
     if (streak == 13) {
         scoreHtml.innerText = "Score: rejected (gang number)";
     }
+
+    document.cookie = `attempts=${attempts}; SameSite=Strict`;
+    document.cookie = `score=${score}; SameSite=Strict`;
+    document.cookie = `streak=${streak}; SameSite=Strict`;
+    document.cookie = `bestStreak=${bestStreak}; SameSite=Strict`;
 }
 
 function ToggleAbout(){
