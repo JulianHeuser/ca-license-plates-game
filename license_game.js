@@ -1,43 +1,43 @@
-const plate_html = document.getElementById("plate");
-const customer_meaning_html = document.getElementById("customer_meaning");
-const verdict_html = document.getElementById("verdict");
-const reviewer_comments_html = document.getElementById("reviewer_comments");
+const plateHtml = document.getElementById("plate");
+const customerMeaningHtml = document.getElementById("customerMeaning");
+const verdictHtml = document.getElementById("verdict");
+const reviewerCommentsHtml = document.getElementById("reviewerComments");
 
-const score_html = document.getElementById("score").children[0];
-const streak_html = document.getElementById("score").children[1];
-const best_streak_html = document.getElementById("score").children[2];
+const scoreHtml = document.getElementById("score").children[0];
+const streakHtml = document.getElementById("score").children[1];
+const bestStreakHtml = document.getElementById("score").children[2];
 
-const main_buttons = document.getElementsByClassName("main_button");
-const retry_button = document.getElementById("retry_button");
+const mainButtons = document.getElementsByClassName("mainButton");
+const retryButton = document.getElementById("retryButton");
 
-let file_data;
-let plate_data;
+let fileData;
+let plateData;
 
 let score = 0;
 let attempts = 0;
-let best_streak = 0;
+let bestStreak = 0;
 let streak = 0;
 
 const Labels = {
     plate: 0,
-    review_reason_code: 1,
-    customer_meaning: 2,
-    reviewer_comments: 3,
-    status : 4
+    reviewReasonCode: 1,
+    customerMeaning: 2,
+    reviewerComments: 3,
+    status: 4
 };
 
 
 // GetFile
 // Made with help from https://stackoverflow.com/a/53550663
-async function GetFile(filepath){
+async function GetFile(filepath) {
     return fetch(filepath)
-        .then((response) =>  {
-                if (response.status !== 200) {
-                    console.log("Looks like there was a problem. Status Code: " + response.status);
-                    return;
-                }
+        .then((response) => {
+            if (response.status !== 200) {
+                console.log("Looks like there was a problem. Status Code: " + response.status);
+                return;
+            }
 
-                return response.text();
+            return response.text();
         })
         .catch((err) => {
             console.log("Fetch Error :-S", err);
@@ -45,9 +45,9 @@ async function GetFile(filepath){
 }
 
 
-function Init(){
+function Init() {
     file = GetFile("applications.csv").then((data) => {
-        file_data = data.split('\n');
+        fileData = data.split('\n');
         StartGame();
     });
 
@@ -55,66 +55,70 @@ function Init(){
 }
 
 
-function StartGame(){
-    for (let button of main_buttons) {
+function StartGame() {
+    for (let button of mainButtons) {
         button.disabled = false;
     }
-    retry_button.style.visibility = "hidden";
-    verdict_html.innerText = "";
-    reviewer_comments_html.innerText = "";
+    retryButton.style.visibility = "hidden";
+    verdictHtml.innerText = "";
+    reviewerCommentsHtml.innerText = "";
 
 
-    let line = file_data[Math.floor(Math.random() * file_data.length)];
-    
-    plate_data = line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/);
+    let line = fileData[Math.floor(Math.random() * fileData.length)];
 
-    plate_html.innerText = plate_data[Labels.plate];
+    plateData = line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/);
 
-    if (plate_data[Labels.customer_meaning] == ""){
-        customer_meaning_html.innerText = "(No description)";
+    if (plateData.length < 5){
+        console.log("Parsing issue: " + plateData);
     }
-    else{
-        customer_meaning_html.innerText = plate_data[Labels.customer_meaning];
+
+    plateHtml.innerText = plateData[Labels.plate];
+
+    if (plateData[Labels.customerMeaning] == "") {
+        customerMeaningHtml.innerText = "(No description)";
+    }
+    else {
+        customerMeaningHtml.innerText = plateData[Labels.customerMeaning];
     }
 }
 
 
-function UserGuess(guess){
-    for (let button of main_buttons) {
+function UserGuess(guess) {
+    for (let button of mainButtons) {
         button.disabled = true;
     }
 
-    retry_button.style.visibility = "visible";
-    let application_status = plate_data[Labels.status] == "Y" ? true : false;
+    retryButton.style.visibility = "visible";
+    let applicationStatus = plateData[Labels.status] == "Y" ? true : false;
 
     attempts++;
 
-    if (guess == application_status){
-        verdict_html.innerText = "Correct!";
+    if (guess == applicationStatus) {
+        verdictHtml.innerText = "Correct!";
         score++;
         streak++;
     }
-    else{
+    else {
         streak = 0;
-        verdict_html.innerText = "Wrong!";
+        verdictHtml.innerText = "Wrong!";
     }
-    
+
     UpdateScores();
-    
-    reviewer_comments_html.innerText = "Reviewer's comments: " + plate_data[Labels.reviewer_comments];
+
+    reviewerCommentsHtml.innerText = "Reviewer's comments: " + plateData[Labels.reviewerComments];
 }
 
 
-function UpdateScores(){
-    if(streak > best_streak){
-        best_streak = streak;
+function UpdateScores() {
+    if (streak > bestStreak) {
+        bestStreak = streak;
     }
 
-    score_html.innerText = "Correct: " + score + "/" + attempts;
-    streak_html.innerText = "Streak: " + streak;
-    best_streak_html.innerText = "Best streak: " + best_streak;
-    if (streak == 13){
-            score_html.innerText = "Score: rejected (gang number)";
+    scoreHtml.innerText = "Correct: " + score + "/" + attempts;
+    streakHtml.innerText = "Streak: " + streak;
+    bestStreakHtml.innerText = "Best streak: " + bestStreak;
+    if (streak == 13) {
+        scoreHtml.innerText = "Score: rejected (gang number)";
     }
 }
 
