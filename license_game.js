@@ -1,10 +1,10 @@
 const plate_html = document.getElementById("plate");
 const customer_meaning_html = document.getElementById("customer_meaning");
 const verdict_html = document.getElementById("verdict");
+const reviewer_comments_html = document.getElementById("reviewer_comments");
 
+let file_data;
 let plate_data;
-
-let application_status;
 
 
 const Labels = {
@@ -36,14 +36,14 @@ async function GetFile(filepath){
 
 function Init(){
     file = GetFile("applications.csv").then((data) => {
-        plate_data = data.split('\n');
+        file_data = data.split('\n');
         StartGame();
     });
 
 }
 
 function StartGame(){
-    let line = plate_data[Math.floor(Math.random() * plate_data.length)];
+    let line = file_data[Math.floor(Math.random() * file_data.length)];
     
     plate_data = line.split(/(?!\B"[^"]*),(?![^"]*"\B)/);
 
@@ -58,17 +58,18 @@ function StartGame(){
 
     console.log(line)
     console.log(plate_data[Labels.status])
-
-    application_status = plate_data[Labels.status] == "Y" ? true : false;
 }
 
 function UserGuess(guess){
+    let application_status = plate_data[Labels.status] == "Y" ? true : false;
     if (guess == application_status){
         verdict_html.innerHTML = "Correct!"
     }
     else{
         verdict_html.innerHTML = "Wrong!"
     }
+    
+    reviewer_comments_html.innerHTML = "Reviewer's comments: " + plate_data[Labels.reviewer_comments]
 }
 
 Init();
