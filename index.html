@@ -9,21 +9,23 @@
             <div></div>
             <div></div>
         </div>
-        <div id = "content">
+        <div id = outer>
+            <div id = "content">
 
-            <div id = "plate"></div>
-            <div id = "customer_meaning"></div>
+                <div id = "plate"></div>
+                <div id = "customer_meaning"></div>
 
-            <button class = "main_button" onclick = "UserGuess(true)">Approved</button>
-            <button class = "main_button" onclick = "UserGuess(false)">Rejected</button>
+                <button class = "main_button" onclick = "UserGuess(true)">Approved</button>
+                <button class = "main_button" onclick = "UserGuess(false)">Rejected</button>
 
-            <div id = "verdict"></div>
+                <div id = "verdict"></div>
 
-            <div id = "reviewer_comments"></div>
+                <div id = "reviewer_comments"></div>
 
-            <button id = "retry_button" onclick = "StartGame()">Do another one</button>
+                <button id = "retry_button" onclick = "StartGame()">Do another one</button>
 
-            <script src = "license_game.js"></script>
+                <script src = "license_game.js"></script>
+            </div>
         </div>
     </body>
 </html>

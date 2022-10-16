@@ -14,6 +14,7 @@ let file_data;
 let plate_data;
 
 let score = 0;
+let attempts = 0;
 let best_streak = 0;
 let streak = 0;
 
@@ -50,11 +51,7 @@ function Init(){
         StartGame();
     });
 
-
-    score_html.innerText = "Score: " + score;
-    streak_html.innerText = "Streak: " + streak;
-    best_streak_html.innerText = "Best streak: " + best_streak;
-
+    UpdateScores();
 }
 
 
@@ -62,7 +59,7 @@ function StartGame(){
     for (let button of main_buttons) {
         button.disabled = false;
     }
-    retry_button.hidden = true;
+    retry_button.style.visibility = "hidden";
     verdict_html.innerText = "";
     reviewer_comments_html.innerText = "";
 
@@ -79,9 +76,6 @@ function StartGame(){
     else{
         customer_meaning_html.innerText = plate_data[Labels.customer_meaning];
     }
-
-    console.log(line);
-    console.log(plate_data[Labels.status]);
 }
 
 
@@ -90,33 +84,38 @@ function UserGuess(guess){
         button.disabled = true;
     }
 
-    retry_button.hidden = false;
+    retry_button.style.visibility = "visible";
     let application_status = plate_data[Labels.status] == "Y" ? true : false;
+
+    attempts++;
+
     if (guess == application_status){
         verdict_html.innerText = "Correct!";
-
         score++;
         streak++;
-        score_html.innerText = "Score: " + score;
-
-        if (streak == 13){
-            score_html.innerText = "Score: rejected (gang number)";
-        }
-
-        if(streak > best_streak){
-            best_streak = streak;
-        }
     }
     else{
         streak = 0;
         verdict_html.innerText = "Wrong!";
     }
     
-    streak_html.innerText = "Streak: " + streak;
-    best_streak_html.innerText = "Best streak: " + best_streak;
+    UpdateScores();
     
     reviewer_comments_html.innerText = "Reviewer's comments: " + plate_data[Labels.reviewer_comments];
 }
 
+
+function UpdateScores(){
+    if(streak > best_streak){
+        best_streak = streak;
+    }
+
+    score_html.innerText = "Correct: " + score + "/" + attempts;
+    streak_html.innerText = "Streak: " + streak;
+    best_streak_html.innerText = "Best streak: " + best_streak;
+    if (streak == 13){
+            score_html.innerText = "Score: rejected (gang number)";
+    }
+}
 
 Init();

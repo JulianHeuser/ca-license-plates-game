@@ -14,19 +14,31 @@ button{
     border-color: grey;
 }
 
-body{
-    margin: 0 auto;
-}
-
 #score{
     position: absolute;
     padding: 10px;
     font-size: 20px;
     text-align: left;
+    top: 0;
+    bottom: 0;
+} 
+
+body{
+    margin: 0;
+}
+
+#outer{
+    position: relative;
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
 }
 
 #content{
-    text-align: center;
     width: 50%;
-    margin-left: 25%;
+
+    text-align: center;
 }
