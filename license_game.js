@@ -66,7 +66,7 @@ function StartGame(){
 
     let line = file_data[Math.floor(Math.random() * file_data.length)];
     
-    plate_data = line.split(/(?!\B"[^"]*),(?![^"]*"\B)/);
+    plate_data = line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/);
 
     plate_html.innerText = plate_data[Labels.plate];
 
