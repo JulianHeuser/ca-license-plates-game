@@ -3,11 +3,19 @@ const customer_meaning_html = document.getElementById("customer_meaning");
 const verdict_html = document.getElementById("verdict");
 const reviewer_comments_html = document.getElementById("reviewer_comments");
 
+const score_html = document.getElementById("score").children[0];
+const streak_html = document.getElementById("score").children[1];
+const best_streak_html = document.getElementById("score").children[2];
+
 const main_buttons = document.getElementsByClassName("main_button");
 const retry_button = document.getElementById("retry_button");
 
 let file_data;
 let plate_data;
+
+let score = 0;
+let best_streak = 0;
+let streak = 0;
 
 const Labels = {
     plate: 0,
@@ -42,6 +50,11 @@ function Init(){
         StartGame();
     });
 
+
+    score_html.innerText = "Score: " + score;
+    streak_html.innerText = "Streak: " + streak;
+    best_streak_html.innerText = "Best streak: " + best_streak;
+
 }
 
 
@@ -50,21 +63,21 @@ function StartGame(){
         button.disabled = false;
     }
     retry_button.hidden = true;
-    verdict_html.innerHTML = "";
-    reviewer_comments_html.innerHTML = "";
+    verdict_html.innerText = "";
+    reviewer_comments_html.innerText = "";
 
 
     let line = file_data[Math.floor(Math.random() * file_data.length)];
     
     plate_data = line.split(/(?!\B"[^"]*),(?![^"]*"\B)/);
 
-    plate_html.innerHTML = plate_data[Labels.plate];
+    plate_html.innerText = plate_data[Labels.plate];
 
     if (plate_data[Labels.customer_meaning] == ""){
-        customer_meaning_html.innerHTML = "(No description)";
+        customer_meaning_html.innerText = "(No description)";
     }
     else{
-        customer_meaning_html.innerHTML = plate_data[Labels.customer_meaning];
+        customer_meaning_html.innerText = plate_data[Labels.customer_meaning];
     }
 
     console.log(line);
@@ -80,13 +93,29 @@ function UserGuess(guess){
     retry_button.hidden = false;
     let application_status = plate_data[Labels.status] == "Y" ? true : false;
     if (guess == application_status){
-        verdict_html.innerHTML = "Correct!";
+        verdict_html.innerText = "Correct!";
+
+        score++;
+        streak++;
+        score_html.innerText = "Score: " + score;
+
+        if (streak == 13){
+            score_html.innerText = "Score: rejected (gang number)";
+        }
+
+        if(streak > best_streak){
+            best_streak = streak;
+        }
     }
     else{
-        verdict_html.innerHTML = "Wrong!";
+        streak = 0;
+        verdict_html.innerText = "Wrong!";
     }
     
-    reviewer_comments_html.innerHTML = "Reviewer's comments: " + plate_data[Labels.reviewer_comments];
+    streak_html.innerText = "Streak: " + streak;
+    best_streak_html.innerText = "Best streak: " + best_streak;
+    
+    reviewer_comments_html.innerText = "Reviewer's comments: " + plate_data[Labels.reviewer_comments];
 }
 
 

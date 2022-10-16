@@ -8,7 +8,7 @@ button{
 
     border-width: 2px;
     border-style: solid;
-
+    
     padding: 5vh;
     margin: 5px;
     border-color: grey;
@@ -16,5 +16,17 @@ button{
 
 body{
     margin: 0 auto;
+}
+
+#score{
+    position: absolute;
+    padding: 10px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#content{
     text-align: center;
+    width: 50%;
+    margin-left: 25%;
 }
