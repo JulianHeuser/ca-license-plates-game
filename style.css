@@ -1,0 +1,20 @@
+#plate{
+    font-size: 36px;
+}
+
+button{
+    font-size: 20px;
+    border-radius: 0;
+
+    border-width: 2px;
+    border-style: solid;
+
+    padding: 5vh;
+    margin: 5px;
+    border-color: grey;
+}
+
+body{
+    margin: 0 auto;
+    text-align: center;
+}

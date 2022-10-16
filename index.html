@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
-<body>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
 
-<div id = "plate"></div>
-<div id = "customer_meaning"></div>
+        <div id = "plate"></div>
+        <div id = "customer_meaning"></div>
 
-<button onclick = "UserGuess(true)">Approved</button>
-<button onclick = "UserGuess(false)">Rejected</button>
+        <button class = "main_button" onclick = "UserGuess(true)">Approved</button>
+        <button class = "main_button" onclick = "UserGuess(false)">Rejected</button>
 
-<div id = "verdict"></div>
+        <div id = "verdict"></div>
 
-<div id = "reviewer_comments"></div>
+        <div id = "reviewer_comments"></div>
 
-<script src = "license_game.js"></script>
-</body>
+        <button id = "retry_button" onclick = "StartGame()">Do another one</button>
+
+        <script src = "license_game.js"></script>
+    </body>
 </html>
